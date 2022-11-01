@@ -18,8 +18,6 @@ which runs
 terraform plan -out tfplan
 ```
 
-
-
 ## Apply (spin up server)
 
 ``` sh
@@ -45,3 +43,14 @@ SERVER_IP=$(terraform output --raw server-ip)
 ssh root@$SERVER_IP
 ```
 
+## Destroy (spin down server)
+
+``` sh
+nix run .#destroy
+```
+
+which runs
+
+``` sh
+terraform plan -out tfplan
+```

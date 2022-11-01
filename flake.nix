@@ -45,6 +45,15 @@
             type = "app";
             program = "${script}";
           };
+
+          destroy = let
+            script = pkgs.writeShellScript "apply.sh" ''
+              ${terraform-bin} destroy
+            '';
+          in {
+            type = "app";
+            program = "${script}";
+          };
         };
       });
 }
