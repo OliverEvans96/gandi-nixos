@@ -41,14 +41,6 @@ data "openstack_compute_keypair_v2" "oliver-laptop" {
   name = "oliver-laptop"
 }
 
-# Create a storage volume
-resource "openstack_blockstorage_volume_v3" "nixos-volume" {
-  name        = "nixos-volume"
-  description = "20GB nixos volume"
-  image_id    = data.openstack_images_image_v2.nixos.id
-  size        = 20 # GiB
-}
-
 # Create a compute instance
 resource "openstack_compute_instance_v2" "nixos" {
   name      = "gandi-nixos-r1"
@@ -56,8 +48,9 @@ resource "openstack_compute_instance_v2" "nixos" {
   key_pair  = data.openstack_compute_keypair_v2.oliver-laptop.name
 
   block_device {
-    uuid             = resource.openstack_blockstorage_volume_v3.nixos-volume.id
-    source_type      = "volume"
+    source_type      = "image"
     destination_type = "volume"
+    uuid             = data.openstack_images_image_v2.nixos.id
+    volume_size      = 20 # GiB
   }
 }
