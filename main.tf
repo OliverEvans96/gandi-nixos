@@ -18,13 +18,10 @@ data "sops_file" "secrets" {
 
 # Configure the OpenStack Provider
 provider "openstack" {
-  user_name = data.sops_file.secrets.data["username"]
-  # tenant_name = "admin"
+  user_name        = data.sops_file.secrets.data["username"]
   user_domain_name = "public"
-  # project_domain_name = "public"
-  auth_url = "https://keystone.sd6.api.gandi.net:5000/v3"
-  password = data.sops_file.secrets.data["password"]
-  # region      = "RegionOne"
+  auth_url         = "https://keystone.sd6.api.gandi.net:5000/v3"
+  password         = data.sops_file.secrets.data["password"]
 }
 
 # Query the Gandi NixOS image
@@ -57,7 +54,6 @@ resource "openstack_compute_instance_v2" "nixos" {
   name      = "gandi-nixos-r1"
   flavor_id = data.openstack_compute_flavor_v2.v-r1.id
   key_pair  = data.openstack_compute_keypair_v2.oliver-laptop.name
-  # security_groups = ["default"]
 
   block_device {
     uuid             = resource.openstack_blockstorage_volume_v3.nixos-volume.id
