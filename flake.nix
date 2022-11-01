@@ -12,49 +12,36 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         terraform-bin = "${pkgs.terraform}/bin/terraform";
+        mkShellApp = body:
+          let script = pkgs.writeShellScript "script.sh" body;
+          in {
+            type = "app";
+            program = "${script}";
+          };
+
       in {
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [ ssh sops terraform openstackclient ];
         };
 
         apps = {
-          plan = let
-            script = pkgs.writeShellScript "plan.sh" ''
-              ${terraform-bin} plan -out tfplan
-            '';
-          in {
-            type = "app";
-            program = "${script}";
-          };
+          plan = mkShellApp ''
+            ${terraform-bin} plan -out tfplan
+          '';
 
-          apply = let
-            script = pkgs.writeShellScript "apply.sh" ''
-              ${terraform-bin} apply tfplan
-            '';
-          in {
-            type = "app";
-            program = "${script}";
-          };
+          apply = mkShellApp ''
+            ${terraform-bin} apply tfplan
+          '';
 
-          login = let
-            script = pkgs.writeShellScript "login.sh" ''
-              SERVER_IP=$(${terraform-bin} output --raw server-ip)
-              echo "ssh root@$SERVER_IP"
-              ssh root@$SERVER_IP
-            '';
-          in {
-            type = "app";
-            program = "${script}";
-          };
+          login = mkShellApp ''
+            SERVER_IP=$(${terraform-bin} output --raw server-ip)
+            echo "ssh root@$SERVER_IP"
+            ssh root@$SERVER_IP
+          '';
 
-          destroy = let
-            script = pkgs.writeShellScript "apply.sh" ''
-              ${terraform-bin} destroy
-            '';
-          in {
-            type = "app";
-            program = "${script}";
-          };
+          destroy = mkShellApp ''
+            ${terraform-bin} destroy
+          '';
         };
       });
 }
