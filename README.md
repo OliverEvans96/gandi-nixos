@@ -52,7 +52,7 @@ nix run .#destroy
 which runs
 
 ``` sh
-terraform plan -out tfplan
+terraform destroy
 ```
 
 ## Deploy
