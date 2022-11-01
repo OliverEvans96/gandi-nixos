@@ -39,6 +39,7 @@
           login = let
             script = pkgs.writeShellScript "login.sh" ''
               SERVER_IP=$(${terraform-bin} output --raw server-ip)
+              echo "ssh root@$SERVER_IP"
               ssh root@$SERVER_IP
             '';
           in {
