@@ -54,3 +54,14 @@ which runs
 ``` sh
 terraform plan -out tfplan
 ```
+
+## Deploy
+
+TODO: How to deploy new NixOS configs
+
+# Useful links
+
+- [Gandi + Terraform](https://docs.gandi.net/en/cloud/vps/api/index.html)
+- [Terraform OpenStack Provider](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs)
+- [sops w/ age](https://github.com/mozilla/sops#encrypting-using-age)
+- [.sops.yaml config file](https://github.com/mozilla/sops#using-sops-yaml-conf-to-select-kms-pgp-for-new-files)
