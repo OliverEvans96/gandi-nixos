@@ -9,7 +9,7 @@ This repository demonstrates :
 
 ## Usage
 ``` sh
-# 1. Insert secrets (Gandi username/password)
+# 1. Insert secrets (Gandi username/password + GitHub token)
 sops secrets.yaml
 
 # 2. Plan terraform deployment
