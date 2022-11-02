@@ -1,45 +1,32 @@
 # Gandi NixOS Deployment with Terraform
 
-1. Insert secrets (Gandi username/password)
 
+
+## Usage
 ``` sh
+# 1. Insert secrets (Gandi username/password)
 sops secrets.yaml
-```
 
-2. Plan
-
-``` sh
+# 2. Plan deployment
 nix run .#plan
-```
 
-3. Apply (spin up server)
-
-``` sh
+# 3. Apply (spin up server)
 nix run .#apply
-```
 
-4. Deploy NixOS config (via nixos-rebuild / SSH)
-
-``` sh
+# 4. Deploy NixOS config (via nixos-rebuild / SSH)
 nix run .#deploy
-```
 
-
-5. Login via SSH (via mosh)
-
-``` sh
+# 5. Login via SSH (via mosh)
 nix run .#login
-```
 
-6. Destroy (spin down server)
-
-``` sh
+# 6. Destroy (spin down server)
 nix run .#destroy
 ```
 
 # Useful links
 
 - [Gandi + Terraform](https://docs.gandi.net/en/cloud/vps/api/index.html)
-- [Terraform OpenStack Provider](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs)
+- [OpenStack Terraform Provider](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs)
 - [sops w/ age](https://github.com/mozilla/sops#encrypting-using-age)
 - [.sops.yaml config file](https://github.com/mozilla/sops#using-sops-yaml-conf-to-select-kms-pgp-for-new-files)
+- [GitHub Terraform Provider](https://registry.terraform.io/providers/integrations/github/latest/docs)
