@@ -48,8 +48,12 @@
           '';
 
           deploy = mkShellApp ''
-            SERVER_IP=$(${terraform-bin} output --raw server-ip)
-            ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake .#gandi-nixos --target-host "root@$SERVER_IP"
+            if [ -z $NIXOS_SERVER_IP ]
+            then
+              NIXOS_SERVER_IP=$(${terraform-bin} output --raw server-ip)
+            fi
+
+            ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake .#gandi-nixos --target-host root@$NIXOS_SERVER_IP
           '';
 
           destroy = mkShellApp ''
