@@ -27,6 +27,7 @@
             terraform
             openstackclient
             gh
+            mosh
           ];
         };
 
@@ -44,7 +45,7 @@
           login = mkShellApp ''
             SERVER_IP=$(${terraform-bin} output --raw server-ip)
             set -x
-            ssh -i ssh_private_key root@$SERVER_IP
+            mosh --ssh="ssh -i ssh_private_key" root@$SERVER_IP
           '';
 
           deploy = mkShellApp ''
