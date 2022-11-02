@@ -14,7 +14,7 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: "/nix/store/"
-        key: ${{ runner.os }}-${{ hashFiles('flake.nix', 'flake.lock', 'nixos/*.nix') }}
+        key: ${{ runner.os }}
     - run: 'mkdir -p $HOME/.ssh && echo -n "${NIXOS_SSH_KEY}" > $HOME/.ssh/id_rsa && chmod 600 $HOME/.ssh/id_rsa'
       env:
         NIXOS_SSH_KEY: ${{ secrets.ssh_private_key }}
