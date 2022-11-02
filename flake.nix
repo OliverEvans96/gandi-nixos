@@ -48,7 +48,7 @@
           '';
 
           deploy = mkShellApp ''
-            if [ -z $NIXOS_SERVER_IP ]
+            if [ -z "$NIXOS_SERVER_IP" ]
             then
               NIXOS_SERVER_IP=$(${terraform-bin} output --raw server-ip)
             fi

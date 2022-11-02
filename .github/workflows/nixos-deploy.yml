@@ -15,3 +15,5 @@ jobs:
       env:
         NIXOS_SSH_KEY: ${{ secrets.nixos_ssh_key }}
     - run: 'nix run .#deploy'
+      env:
+        NIXOS_SERVER_IP: ${{ secrets.nixos_server_ip  }}
