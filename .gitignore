@@ -1,3 +1,4 @@
 tfplan
 *.tfstate*
 .terraform
+ssh_private_key

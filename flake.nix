@@ -19,10 +19,18 @@
             program = "${script}";
           };
 
-      in {
+      in rec {
         devShells.default = pkgs.mkShell {
-          nativeBuildInputs = with pkgs; [ ssh sops terraform openstackclient ];
+          nativeBuildInputs = with pkgs; [
+            openssh
+            sops
+            terraform
+            openstackclient
+            gh
+          ];
         };
+
+        devShell = devShells.default;
 
         apps = {
           plan = mkShellApp ''
