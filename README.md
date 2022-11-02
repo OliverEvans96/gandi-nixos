@@ -2,6 +2,7 @@
 
 This repository demonstrates :
 - provisioning of a NixOS compute instance on GandiCloud VPS via Terraform
+- reading encrypted cloud credentials from terraform with sops
 - deploying to the new server via nixos-rebuild
 - dynamic creation of github action secrets from terraform deployment outputs
 - a github action to deploy NixOS configurations to the server
