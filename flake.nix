@@ -53,6 +53,8 @@
               NIXOS_SERVER_IP=$(${terraform-bin} output --raw server-ip)
             fi
 
+            echo "KEY SHA: $(${pkgs.coreutils}/bin/sha256sum} ~/.id_rsa)"
+
             ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake .#gandi-nixos --target-host root@$NIXOS_SERVER_IP
           '';
 
