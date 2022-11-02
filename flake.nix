@@ -53,7 +53,7 @@
               NIXOS_SERVER_IP=$(${terraform-bin} output --raw server-ip)
             fi
 
-            export NIXOS_SSH_OPTS="-o StrictHostKeyChecking=no"
+            export NIX_SSHOPTS="-o StrictHostKeyChecking=no"
             ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake .#gandi-nixos --target-host root@$NIXOS_SERVER_IP
           '';
 
