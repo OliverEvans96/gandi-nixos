@@ -6,58 +6,36 @@
 sops secrets.yaml
 ```
 
-## Plan
+2. Plan
 
 ``` sh
 nix run .#plan
 ```
 
-which runs
-
-``` sh
-terraform plan -out tfplan
-```
-
-## Apply (spin up server)
+3. Apply (spin up server)
 
 ``` sh
 nix run .#apply
 ```
 
-which runs
+4. Deploy NixOS config (via nixos-rebuild / SSH)
 
 ``` sh
-terraform apply tfplan
+nix run .#deploy
 ```
 
-## Login via SSH
+
+5. Login via SSH (via mosh)
 
 ``` sh
 nix run .#login
 ```
 
-which runs
-
-``` sh
-SERVER_IP=$(terraform output --raw server-ip)
-ssh root@$SERVER_IP
-```
-
-## Destroy (spin down server)
+6. Destroy (spin down server)
 
 ``` sh
 nix run .#destroy
 ```
-
-which runs
-
-``` sh
-terraform destroy
-```
-
-## Deploy
-
-TODO: How to deploy new NixOS configs
 
 # Useful links
 
