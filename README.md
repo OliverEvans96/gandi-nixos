@@ -7,10 +7,10 @@
 # 1. Insert secrets (Gandi username/password)
 sops secrets.yaml
 
-# 2. Plan deployment
+# 2. Plan terraform deployment
 nix run .#plan
 
-# 3. Apply (spin up server)
+# 3. Terraform apply (spin up server)
 nix run .#apply
 
 # 4. Deploy NixOS config (via nixos-rebuild / SSH)
