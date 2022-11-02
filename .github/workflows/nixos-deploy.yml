@@ -11,7 +11,7 @@ jobs:
       with:
         extra_nix_config: |
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-    - run: 'mkdir -p $HOME/.ssh && echo "${NIXOS_SSH_KEY}" > $HOME/.ssh/id_rsa && sha256sum $HOME/.ssh/id_rsa'
+    - run: 'mkdir -p $HOME/.ssh && echo -n "${NIXOS_SSH_KEY}" > $HOME/.ssh/id_rsa && sha256sum $HOME/.ssh/id_rsa'
       env:
         NIXOS_SSH_KEY: ${{ secrets.ssh_private_key }}
     - run: 'nix run .#deploy'
