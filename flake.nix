@@ -43,13 +43,32 @@
 
           login = mkShellApp ''
             SERVER_IP=$(${terraform-bin} output --raw server-ip)
-            echo "ssh root@$SERVER_IP"
-            ssh root@$SERVER_IP
+            set -x
+            ssh -i ssh_private_key root@$SERVER_IP
+          '';
+
+          deploy = mkShellApp ''
+            SERVER_IP=$(${terraform-bin} output --raw server-ip)
+            ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake .#gandi-nixos --target-host "root@$SERVER_IP"
           '';
 
           destroy = mkShellApp ''
             ${terraform-bin} destroy
           '';
+        };
+      }) // (let pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      in {
+
+        nixosConfigurations.gandi-nixos = nixpkgs.lib.nixosSystem {
+          inherit pkgs;
+
+          system = "x86_64-linux";
+          modules = [
+            (nixpkgs + "/nixos/modules/virtualisation/openstack-config.nix")
+            ./nixos/default.nix
+            # ./nixos/hardware-configuration.nix
+          ];
+
         };
       });
 }
