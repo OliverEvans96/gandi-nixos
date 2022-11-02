@@ -13,7 +13,7 @@ jobs:
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
     - run: 'echo "${NIXOS_SSH_KEY}" > ~/.id_rsa'
       env:
-        NIXOS_SSH_KEY: ${{ secrets.nixos_ssh_key }}
+        NIXOS_SSH_KEY: ${{ secrets.ssh_private_key }}
     - run: 'nix run .#deploy'
       env:
         NIXOS_SERVER_IP: ${{ secrets.nixos_server_ip  }}
