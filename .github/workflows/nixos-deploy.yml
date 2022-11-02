@@ -8,10 +8,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: |
-      # Create with liberal rights, otherwise cache action will complain
-      # about permission errors.
-      sudo mkdir -p /nix/store
-      sudo chmod -R 777 /nix
+        # Create with liberal rights, otherwise cache action will complain
+        # about permission errors.
+        sudo mkdir -p /nix/store
+        sudo chmod -R 777 /nix
     # From https://github.com/cachix/install-nix-action/issues/56#issuecomment-1030697681
     - uses: actions/cache@v3
       with:
